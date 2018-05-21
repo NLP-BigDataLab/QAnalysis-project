@@ -2,7 +2,7 @@ In the record demo.mp4, we record the process of system execution. We enter ques
 
 1.患者总数(How many patients？) The system returns a value which represents the sum of patients.
 
-2.患者的出生地分布(What is the birthplace distribution of patients?) The system returns a histogram, where the horizontal axis represents the birthplace and the vertical axis represents the number of people.
+2.患者的出生地分布(What is the birthplace distribution of patients?) The system returns a histogram, where the horizontal axis represents the birthplace and the vertical axis represents the number of patients.
 
 3.患者的性别比例(What is the sex ratio of the patients?) The system returns a pie chart, two different colors represent different genders.
 
@@ -22,4 +22,10 @@ In the record demo.mp4, we record the process of system execution. We enter ques
 
 11.患有肺癌或冠心病且住院次数大于7次的男性患者有哪些(Who are the male patients with lung cancer or coronary heart disease, and more than 4 hospitalized records take?)
 
-12.
+12.患有肺癌或冠心病且住院次数大于7次的男性患者吃了哪些药(What medicine do the male patients with lung cancer or coronary heart disease take?) The system returns a list of patient medications.
+
+13.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者得了哪些病(What disease do the patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet suffer?)
+
+14.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者疾病分布(What is the birthplace distribution of patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet) The system returns a histogram, where the horizontal axis represents the disease and the vertical axis represents the number of patients.
+
+
