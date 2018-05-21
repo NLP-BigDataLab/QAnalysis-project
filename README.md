@@ -24,8 +24,13 @@ In the record demo.mp4, we record the process of system execution. We enter ques
 
 12.患有肺癌或冠心病且住院次数大于7次的男性患者吃了哪些药(What medicine do the male patients with lung cancer or coronary heart disease take?) The system returns a list of patient medications.
 
-13.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者得了哪些病(What disease do the patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet suffer?)
+13.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者得了哪些病(What disease do the patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet suffer?) The system returns a disease list of patient.
 
-14.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者疾病分布(What is the birthplace distribution of patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet) The system returns a histogram, where the horizontal axis represents the disease and the vertical axis represents the number of patients.
+14.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者疾病分布(What is the disease distribution of patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet?) The system returns a histogram, where the horizontal axis represents the disease and the vertical axis represents the number of patients.
 
+15.服用百令胶囊和冬凌草片且患有冠心病和肺癌的患者疾病比例(What is the disease ratio of patients with coronary heart disease and lung cancer who took the ZhiLing capsule and Dong ling cao tablet?) The system returns a pie chart, seven different colors represent different genders.
+
+16.没有患有冠心病的肺癌患者(Who are the patients with lung cancer and no coronary heart disease?)
+
+17.患有冠心病的非肺癌患者(Who are the patients with coronary heart disease and no lung cancer?)
 
