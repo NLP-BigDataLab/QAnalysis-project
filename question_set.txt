@@ -1,0 +1,577 @@
+This document includes all 211 evaluation questions and query results in our paper. It can be accessed from https://github.com/NLP-BigDataLab/QAnalysis-project.
+
+node =1
+19个正确
+1.总患者人数 
+MATCH (patient:病人) return count(patient)
+
+2.患者的总人数是多少 
+MATCH (patient:病人) return count(patient)
+
+3.一共有多少患者
+MATCH (patient:病人) return count(patient)
+
+4.病人有哪些
+MATCH (patient:病人) return patient
+
+5.病人人数有多少
+MATCH (patient:病人) RETURN COUNT(patient)
+
+6.有多少个病人
+MATCH (patient:病人) RETURN COUNT(patient)
+
+7.共有多少病人
+MATCH (patient:病人) RETURN COUNT(patient)
+
+8.一共有多少药品
+MATCH (drug:药品) RETURN COUNT(drug)
+
+9.用了哪些药品
+MATCH (drug:药品) RETURN drug
+
+10.有多少药物
+MATCH (drug:药品) RETURN COUNT(drug)
+
+11.患者吃了哪些药
+MATCH (patient:病人)-[r:`服用`]->(drug:药品) RETURN DISTINCT drug
+
+12.患者的用药分布如何？
+MATCH (patient:病人)-[r:`服用`]->(drug:药品) RETURN DISTINCT drug
+
+13.手术有哪些
+MATCH (procedure:手术) RETURN procedure
+
+14.总共有多少手术
+MATCH (procedure:手术) RETURN COUNT(procedure)
+
+15.病人做了哪些手术
+MATCH (patient:病人)-[r:`作手术`]->(procedure:手术) RETURN DISTINCT procedure
+
+16.共有多少化验
+MATCH (test:化验) RETURN COUNT(test)
+
+17.有哪些化验？
+MATCH (test:化验) RETURN test
+
+18.有哪些ACEI类的药？
+MATCH (drug:药品)-[r:SubClassOf]->(:ACEI类药) RETURN DISTINCT drug
+
+19 有哪些利尿剂？
+MATCH (drug:药品)-[r:SubClassOf]->(:利尿剂) RETURN DISTINCT drug
+
+解析不正确的0个
+
+node=2
+83个正确的
+1 上海的患者的平均年龄
+MATCH (patient:`病人`) WHERE patient.居住地="上海"  RETURN AVG(patient.年龄)
+
+2 男性患者的年龄分布
+MATCH (patient:`病人`) WHERE patient.性别="男"  RETURN patient.年龄
+
+3 男性患哮喘病人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE patient.性别="男" AND disease.名称 = "哮喘病"   RETURN COUNT(patient)
+
+4 年龄大于75岁的人数
+MATCH (patient:`病人`) WHERE patient.年龄 >75  RETURN COUNT(patient)
+
+5 年龄在65-74岁的人数
+MATCH (patient:`病人`) WHERE patient.年龄 >65 and patient.年龄 <74 RETURN COUNT(patient)
+
+6 年龄小于50岁的患者人数
+MATCH (patient:`病人`) WHERE patient.年龄 <50  RETURN COUNT(patient)
+
+7 年龄在50-55岁的患者人数
+MATCH (patient:`病人`) WHERE patient.年龄 >50 and patient.年龄 <55 RETURN COUNT(patient)
+
+8 年龄大于80岁的患者人数
+MATCH (patient:`病人`) WHERE patient.年龄 >80  RETURN COUNT(patient)
+
+9 男性患者的总人数
+MATCH (patient:`病人`) WHERE patient.性别 = "男"  RETURN COUNT(patient)
+
+10 女性患者的总人数
+MATCH (patient:`病人`) WHERE patient.性别 = "女"  RETURN COUNT(patient)
+
+11 得心力衰竭的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "心力衰竭"   RETURN COUNT(patient)
+
+12 得高血压的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"   RETURN COUNT(patient)
+
+13 得糖尿病的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "糖尿病"   RETURN COUNT(patient)
+
+14 患有稳定型冠心病的总人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "稳定型冠心病"   RETURN COUNT(patient)
+
+15 得中风的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "中风"   RETURN COUNT(patient)
+
+16 患有高血压的患者人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"   RETURN COUNT(patient)
+
+17 没有得高血压的患者人数
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"冠心病"}) RETURN COUNT(patient)
+
+18 没有得糖尿病的患者人数
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"糖尿病"}) RETURN COUNT(patient)
+
+19 得短暂性脑缺血发作的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "短暂性脑缺血发作"   RETURN COUNT(patient)
+
+20 患有前心肌梗死的总人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "心肌梗死"   RETURN COUNT(patient)
+
+21 患有再发性心肌梗死的总人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "再发性心肌梗死"   RETURN COUNT(patient)
+
+22 使用硝酸酯类药物的患者总人数
+MATCH (patient:`病人`)-[r1:`服用`]->(drug:药品)-[r2:SubClassOf]->(:硝酸酯类药物)  RETURN COUNT(patient)
+
+23 没得关节炎患者的人数
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"关节炎"}) RETURN COUNT(patient)
+
+24 得了关节炎患者的人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "关节炎"   RETURN COUNT(patient)
+
+25 女性患者的人数
+MATCH (patient:`病人`) WHERE patient.性别 = "女"  RETURN COUNT(patient)
+
+26 心电图提示正常的患者有多少
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="心电图" and r.提示="正常"  RETURN COUNT(patient)
+
+27 女患者的人数
+MATCH (patient:`病人`) WHERE patient.性别 = "女"  RETURN COUNT(patient)
+
+28 得了冠状动脉疾病的患者人数
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "冠状动脉疾病"   RETURN COUNT(patient)
+
+29 中性粒细胞浓度低于正常值的人数
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="中性粒细胞" and r.提示="低"  RETURN COUNT(patient)
+
+30 中性粒细胞浓度结果为正常值的人数
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="中性粒细胞" and r.提示="正常"  RETURN COUNT(patient)
+
+31 中性粒细胞浓度超过正常值的人数
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="中性粒细胞" and r.提示="高"  RETURN COUNT(patient)
+
+32 男性患者的平均年龄
+MATCH (patient:`病人`) WHERE patient.性别="男"  RETURN AVG(patient.年龄)
+
+33 女性患者的平均年龄
+MATCH (patient:`病人`) WHERE patient.性别="女"  RETURN AVG(patient.年龄)
+
+34 未做PICC插管术病患数目
+MATCH (patient:病人) WHERE NOT (patient)-[:`做手术`]->(:疾病{名称 :"PICC插管术"}) RETURN COUNT(patient)
+
+35 患者的平均年龄
+MATCH (patient:`病人`) RETURN AVG(patient.年龄)
+
+36 患者的总胆固醇的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="总胆固醇" RETURN AVG(r.结果值)
+
+37 患者的HDL的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="HDL" RETURN AVG(r.结果值)
+
+38 患者的心率的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="心率" RETURN AVG(r.结果值)
+
+39 患者肌酐的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="肌酐" RETURN AVG(r.结果值)
+
+40 患者白细胞浓度的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="白细胞" RETURN AVG(r.结果值)
+
+41 患者血红蛋白浓度的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="血红蛋白" RETURN AVG(r.结果值)
+
+42 患有高血压的性别比例
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"   RETURN COUNT(patient.性别)
+
+43 患有糖尿病的性别比例
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"   RETURN COUNT(patient.性别)
+
+44 患有关节炎患者年龄平均值
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "关节炎"   RETURN AVG(patient.年龄)
+
+45 没有患有关节炎的患者年龄平均值
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"关节炎"}) RETURN AVG(patient.年龄)
+
+46 患有关节炎的女性患者有多少
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "关节炎" and  patient.性别="女"  RETURN COUNT(patient)
+
+47 没有患有关节炎的女性患者有多少
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"关节炎"}) and  patient.性别="女"  RETURN COUNT(patient)
+
+48 患有关节炎的患者年龄的平均值
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "关节炎"  RETURN AVG(patient.年龄)
+
+49 没有患有关节炎的患者住院次数的平均值
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"关节炎"})  RETURN AVG(patient.住院次数)
+
+50 得心力衰竭的患者的性别比例
+MATCH (patient:`病人`)-[r:`被诊断`]->(disease:疾病) WHERE disease.名称 = "心力衰竭"   RETURN COUNT(patient.性别)
+
+51 心力衰竭患者用药比例
+MATCH (drug:药品)<-[r1:`服用`]-(patient:`病人`)-[r2:`被诊断`]->(disease:疾病) WHERE disease.名称 = "心力衰竭"   RETURN drug
+
+52 患有高血压患者的药物分布
+MATCH (drug:药品)<-[r1:`服用`]-(patient:`病人`)-[r2:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"  RETURN DISTINCT drug
+
+53 高血压患者中成药分布
+MATCH (:中成药)<-[r1:`SubClassOf`]-(drug:药品)<-[r2:`服用`]-(patient:`病人`)-[r3:`被诊断`]->(disease:疾病) WHERE disease.名称 = "高血压"  RETURN DISTINCT drug
+
+54 男性患者的患病比例
+MATCH (patient:`病人`)-[r:`服用`]->(drug:药品) WHERE patient.性别="男"  RETURN drug
+
+55 女性患者的用药分布
+MATCH (patient:`病人`)-[r:`服用`]->(drug:药品) WHERE patient.性别="女"  RETURN drug
+
+56 未得糖尿病患者平均年龄为多少？
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"糖尿病"})  RETURN AVG(patient.年龄)
+
+57 做丙肝病毒抗体提示低病人？
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="丙肝病毒抗体" and r.提示="低"  RETURN COUNT(patient)
+
+58 上海病患年龄比例
+MATCH (patient:`病人`) WHERE patient.居住地="上海"  RETURN AVG(patient.年龄)
+
+59 没有做静脉穿刺术患者数量
+MATCH (patient:病人) WHERE NOT (patient)-[:`做手术`]->(:手术{名称 :"静脉穿刺术"})  RETURN COUNT(patient)
+
+60 江苏患者性别分布
+MATCH (patient:`病人`) WHERE patient.居住地="江苏"  RETURN patient.性别
+
+61 年纪大于54岁患者住院次数平均值
+MATCH (patient:`病人`) WHERE patient.年龄>54  RETURN AVG(patient.住院次数)
+
+62 1965年入院病人住院次数平均值是多少
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>19650101 and inhospital.入院日期<19651231 RETURN AVG(patient.住院次数) 
+
+63 1958年入院病人出生地分布
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>19580101 and inhospital.入院日期<19581231 RETURN DISTINCT(patient.出生地)
+
+64 2013年入院的患者
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>20130101 and inhospital.入院日期<20131231 WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+65 出院日期在2013至2014年的患者的平均住院次数
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.出院日期>20130101 and inhospital.出院日期<20141231 WITH DISTINCT(patient) as result RETURN avg(result.住院次数) as final_result
+
+66 2013至2014年期间出院的患者的平均住院次数
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.出院日期>20130101 and inhospital.出院日期<20141231 WITH DISTINCT(patient) as result RETURN avg(result.住院次数) as final_result
+
+67 入院时间为2013年10月9日的患者
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期=20131009 WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+68 2013年10月入院的患者
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>=20131001 and inhospital.出院日期<=20131031 WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+69 2013年10月9日至2013年12月9日出院的患者有哪些？
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.出院日期>20131009 and inhospital.出院日期<20131209 WITH DISTINCT(patient) as result RETURN avg(result) as final_result
+
+70 60-90岁男性患者的年龄分布
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.年龄>60 and inhospital.年龄<90 and patient.性别='男' WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:住院信息) RETURN result.年龄 as final_result
+
+71 吃了中药的患者平均年龄是多少？
+MATCH (patient:病人)-->(drug:医嘱)-[:SubClassOf*..2]->(:中药) WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:住院信息) RETURN avg(result.年龄) as final_result
+
+72 吃了中药的患者吃了哪些药？
+MATCH (patient:病人)-->(drug:医嘱)-[:SubClassOf*..2]->(:中药) WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:医嘱) RETURN DISTINCT(result) as final_result
+
+73 没吃中药的患者有哪些?
+MATCH (patient:病人) WHERE (not (patient:病人)-->(drug:医嘱)-[:SubClassOf*..2]->(:中药)) WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+74 患有肺癌的患者有哪些？
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['肺癌'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+75 男性患者吃了哪些中药？
+MATCH (patient:病人) WHERE patient.性别='男' WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:医嘱)-[:SubClassOf*..2]->(:医嘱) RETURN DISTINCT(result) as final_result
+
+76 哪些病人得了冠心病？
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['冠心病'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+77 得了冠心病的患者吃了哪些中药？
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['冠心病'] WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:医嘱)-[:SubClassOf*..2]->(:医嘱) RETURN DISTINCT(result) as final_result
+
+78 吃了ACEI类药的患者得了哪些病？
+MATCH (patient:病人)-->(drug:医嘱)-[:SubClassOf*..1]->(:ACEI类) WITH DISTINCT(patient) as result_side MATCH (result_side)-->(result:疾病) RETURN DISTINCT(result) as final_result
+
+79 吃了ACEI类药的气血亏虚证患者有哪些？
+MATCH (patient:病人)-->(drug:医嘱)-[:SubClassOf*..1]->(:ACEI类),(patient:病人)-[r2]->(disease:疾病) WHERE disease.疾病名称 in ['气血亏虚证'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+80 有哪些患者得了冠心病？
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['冠心病'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+81 治疗冠心病的中药有哪些？
+MATCH (patient:医嘱)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['冠心病'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+82 含有维生素的中药有哪些？
+MATCH (patient:医嘱)-[r1]->(drug:药物成分) WHERE drug.名称 in ['维生素'] WITH DISTINCT(patient) as result RETURN DISTINCT(result) as final_result
+
+83 得高血压的病人的性别分布
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['高血压'] WITH DISTINCT(patient) as result RETURN result.性别 as final_result
+
+解析不正确的1个
+左半结肠癌的患者用药分布
+MATCH (drug:药品)<-[r1:`服用`]-(patient:病人)-[r2]->(disease:疾病) WHERE disease.疾病名称 in ['结肠癌'] WITH drug as result RETURN result as final_result
+
+node=3
+44个正确
+1 中性粒细胞浓度低于正常值的女性患者人数
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="中性粒细胞" and r.提示="低" and patient.性别="女"  RETURN COUNT(patient)
+
+2 年龄小于55没有患有慢性阻塞性肺疾病的病人人数
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and inhospital.年龄<55 RETURN COUNT(patient)
+
+3 患有慢性阻塞性肺疾病的病人的男女比例 
+MATCH (patient:病人) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) RETURN patient.性别
+
+4 得了心血管的患者的平均年龄
+MATCH (inhospital:住院信息)<--(patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['心血管'] WITH DISTINCT(patient) as result RETURN AVG（inhospital.年龄）as final_result
+
+5 上海的男性患者做过白细胞浓度检查的人数
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="白细胞" and patient.性别="男" and patient.出生地="上海"  RETURN COUNT(patient)
+
+6 上海男性患者的白细胞浓度的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="白细胞" and patient.性别="男" and patient.出生地="上海"  RETURN AVG(r.结果值)
+
+7 上海男性患者的收缩压的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="收缩压" and patient.性别="男" and patient.出生地="上海"  RETURN AVG(r.结果值)
+
+8 上海女性患者的HDL的平均值
+MATCH (patient:病人)-[r:`作化验`]->(test:化验) WHERE test.名称="HDL" and patient.性别="女" and patient.出生地="上海"  RETURN AVG(r.结果值)
+
+9 江苏的且患有糖尿病的男性患者人数
+MATCH (patient:病人)-[r1]->(disease:疾病) WHERE disease.疾病名称 in ['糖尿病'] and patient.出生地="江苏" and patient.性别="男" WITH DISTINCT(patient) as result RETURN COUNT(result) as final_result
+
+10 使用ACEI类药且患有心血管疾病的病人人数
+MATCH (:ACEI类药)<-[:SubClassOf*..1]-(drug:药品)<-[r1:`服用`]-(patient:`病人`)-[r2:`被诊断`]->(disease:疾病) WHERE  disease.名称 = "心血管疾病"  RETURN DISTINCT COUNT(patient) 
+
+11 1998-2004年入院的江苏女性患者人数
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>19980101 and inhospital.入院日期<20041231 and  patient.性别="女" and patient.出生地="江苏" WITH DISTINCT(patient) as result RETURN  COUNT(result) as final_result
+
+12 患有风湿性多肌痛且患有糖尿病的患者人数
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病) WHERE disease1.名称="风湿性多肌痛" and disease2.名称 = "糖尿病"  RETURN DISTINCT COUNT(patient) 
+
+13 患有巨细胞动脉炎和冠心病的患者的平均收缩压
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient:`病人`)-[r3`作化验`]->(test:化验) WHERE disease1.名称="巨细胞动脉炎" and disease2.名称 = "冠心病" and test.名称="收缩压"  RETURN AVG(r3.结果值) 
+
+14 未患有风湿性多肌痛和巨细胞动脉炎的患者的平均年龄
+MATCH (patient:病人)-->(inhospital:住院信息)  WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"风湿性多肌痛"}) and NOT (patient)-[:`被诊断`]->(:疾病{名称 :"巨细胞动脉炎"}) RETURN AVG(inhospital.年龄)
+
+15 患有风湿性多肌痛和巨细胞动脉炎的患者的平均总胆固醇
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient:`病人`)-[r3`作化验`]->(test:化验) WHERE disease1.名称="巨细胞动脉炎" and disease2.名称 = "冠心病" and test.名称="总胆固醇"  RETURN AVG(r3.结果值) 
+
+16 患有心肌梗死和巨细胞动脉炎的患者的平均HDL胆固醇
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient:`病人`)-[r3`作化验`]->(test:化验) WHERE disease1.名称="心肌梗死" and disease2.名称 = "冠心病" and test.名称="HDL胆固醇"  RETURN AVG(r3.结果值) 
+
+17 未患有风湿性多肌痛和巨细胞动脉炎的患者的平均血清肌酐
+MATCH (patient:病人)-[r`作化验`]->(test:化验) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"风湿性多肌痛"}) and NOT (patient)-[:`被诊断`]->(:疾病{名称 :"巨细胞动脉炎"}) and test.名称="血清肌酐" RETURN AVG(r.结果值)
+
+18 患有慢性阻塞性肺疾病且患有心肌梗死的病人人数
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病) WHERE disease1.名称="慢性阻塞性肺疾病" and disease2.名称 = "心肌梗死"  RETURN COUNT(patient) 
+
+19 没有患有慢性阻塞性肺疾病且使用抗胆碱能药的人数 
+MATCH (patient:`病人`)-[r:`服用`]->(drug:药品) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"})  and drug.名称 = "抗胆碱能药"  RETURN DISTINCT COUNT(patient) 
+
+20 没有患有慢性阻塞性肺疾病患者的平均收缩压
+MATCH (patient:病人)-[r:`作化验`]->(test:化验)  WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and test.名称="收缩压" RETURN AVG(r.结果值)
+
+21 没有患有慢性阻塞性肺疾病患者的平均ST段偏移
+MATCH (patient:病人)-[r:`作化验`]->(test:化验)  WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and test.名称="ST段偏移" RETURN AVG(r.结果值)
+
+22 患有慢性阻塞性肺疾病患者且使用利尿剂的人数
+MATCH (patient:`病人`)-[r:`服用`]->(drug:药品), (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"})  and drug.名称 = "利尿剂"  RETURN DISTINCT COUNT(patient) 
+
+23 患有慢性阻塞性肺疾病患者的平均心率
+MATCH (patient:病人)-[r:`作化验`]->(test:化验), (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and test.名称="心率" RETURN AVG(r.结果值)
+
+24 患有慢性阻塞性肺疾病患者的平均肌酐
+MATCH (patient:病人)-[r:`作化验`]->(test:化验), (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and test.名称="肌酐" RETURN AVG(r.结果值)
+
+25 没有患有慢性阻塞性肺疾病且患有心肌梗塞的人数 Y
+MATCH (patient:病人)-[r:`被诊断`]->(disease:疾病)  WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and disease.名称="心肌梗塞" RETURN DISTINCT COUNT(patient) 
+
+26 没有患有慢性阻塞性肺疾病且患有非ST段抬高心肌梗死的人数 Y
+MATCH (patient:病人)-[r:`被诊断`]->(disease:疾病)  WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"慢性阻塞性肺疾病"}) and disease.名称="非ST段抬高心肌梗死" RETURN DISTINCT COUNT(patient) 
+
+27 患有慢性阻塞性肺疾病且患有不稳定型心绞痛的人数 Y
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病) WHERE disease1.名称="慢性阻塞性肺疾病" and disease2.名称 = "不稳定型心绞痛"  RETURN COUNT(patient) 
+
+28 患有慢性阻塞性肺疾病且患有周围性血管疾病的人数 Y
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病) WHERE disease1.名称="慢性阻塞性肺疾病" and disease2.名称 = "周围性血管疾病"  RETURN COUNT(patient) 
+
+29 患有慢性阻塞性肺疾病且患有脑血管病的人数 Y 
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病) WHERE disease1.名称="慢性阻塞性肺疾病" and disease2.名称 = "脑血管病"  RETURN COUNT(patient) 
+
+30 1964年出院冠心病患者平均住院次数为多少？
+MATCH (patient:病人)-->(inhospital:住院信息) WHERE inhospital.出院日期>19640101 and inhospital.出院日期<19641231  WITH DISTINCT(patient) as result RETURN  AVG(result.住院次数) as final_result
+
+31 1954年入院江苏女性病人化验分布
+MATCH (test:化验)-[r:`作化验`]-(patient:病人)-->(inhospital:住院信息) WHERE inhospital.入院日期>19540101 and inhospital.入院日期<19541231 and  patient.性别="女" and patient.出生地="江苏" WITH test as result RETURN result as final_result
+
+32 服用中药的高血压患者人数
+MATCH (:中药)<-[:SubClassOf*..1]-(drug:药品)<-[r1:`服用`]-(patient:`病人`)-[r2:`被诊断`]->(disease:疾病) WHERE  disease.名称 = "高血压"  RETURN DISTINCT COUNT(patient) 
+
+33 患有冠心病和高血压的患者平均年龄
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病),(patient)-[r3:住院]->(inhospital:住院信息) WHERE disease1.名称="冠心病" and disease2.名称 = "高血压"  RETURN AVG(r3.年龄) 
+
+34 吃了中药的冠心病患者吃了哪些药？
+MATCH (:中药)<-[:SubClassOf*..1]-(drug:药品)<-[r1:`服用`]-(patient:`病人`)-[r2:`被诊断`]->(disease:疾病),(drug2:药品)<-[r3:`服用`]-(patient) WHERE  disease.名称 = "冠心病"  RETURN DISTINCT COUNT(drug2) 
+
+35 得了冠心病和心脏病的患者有哪些？
+match (s:病人)-[r1]->(o1:疾病),(s:病人)-[r2]->(o2:疾病) where o1.疾病名称 in ['冠心病'] and o2.疾病名称 in ['心脏病'] with distinct(s) as result return distinct(result) as final_result
+
+36 年龄在60-90岁的冠心病患者
+match (s:病人)-->(o1:住院信息),(s:病人)-[r2]->(o2:疾病) where o1.年龄>60 and o1.年龄<90 and o2.疾病名称 in ['冠心病'] with distinct(s) as result return distinct(result) as final_result
+
+37 1970年之后患有冠心病的患者年龄分布
+match (s:病人)-[r1]->(o1:疾病) where o1.疾病名称 in ['冠心病'] and r1.日期>19700101 with distinct(s) as result_side match (result_side)-->(result:住院信息) return result.年龄 as final_result
+
+38 60-90岁男性患者的年龄分布
+match (s:病人)-->(o1:住院信息)  where o1.年龄>60 and o1.年龄<90 and s.性别='男' with distinct(s) as result_side match  result_side)-->(result:住院信息) return result.年龄 as final_result
+
+39 住院次数大于4次的肺癌患者做了哪些手术?
+match (s:病人)-[r2]->(o2:疾病) where s.住院次数>4 and o2.疾病名称 in ['肺癌'] with distinct(s) as result_side match (result_side)-->(result:手术) return distinct(result) as final_result
+
+40 2012-2013年期间冠心病患者的数量是多少?
+match (s:病人)-[r1]->(o1:疾病) where o1.疾病名称 in ['冠心病'] and r1.日期>20120101 and r1.日期<20131231 with distinct(s) as result return count(result) as final_result
+
+41 没有患有冠心病也没吃中药的患者有哪些？
+match (s:病人) where (not (s:病人)-->(:疾病{疾病名称:['冠心病']})) and (not (s:病人)-->(:医嘱)-[:SubClassOf*..2]->(:中药)) with distinct(s) as result return distinct(result) as final_result
+
+42 吃了ACEI类药的气血亏虚证患者有哪些？
+match (s:病人)-->(:医嘱)-[:SubClassOf*..1]->(:ACEI类),(s:病人)-[r2]->(o2:疾病) where o2.疾病名称 in ['气血亏虚证'] with distinct(s) as result return distinct(result) as final_result
+
+43 吃了中药或得了冠心病的患者有哪些？
+match (s:病人)-->(:医嘱)-[:SubClassOf*..2]->(:中药) with distinct(s) as result return distinct(result) as final_result union match (s:病人)-[r1]->(o1:疾病) where o1.疾病名称 in ['冠心病'] with distinct(s) as result return distinct(result) as final_result
+
+44 患有肺癌或气血亏虚证的患者最小年龄? 
+match (s:病人)-[r1]->(o1:疾病) where o1.疾病名称 in ['肺癌','气血亏虚证'] with distinct(s) as result_side match (result_side)-->(result:住院信息) return result.年龄 as final_result order by result.年龄 asc skip 0 limit 1 
+
+解析不正确的2个
+得了冠心病和风湿性心脏病的患者有哪些
+match (s:病人)-[r1]->(o1:疾病),(s:病人)-[r2]->(o2:疾病) where o1.疾病名称 in ['冠心病'] and o2.疾病名称 in ['心脏病'] with distinct(s) as result return distinct(result) as final_result
+
+患有高血糖和原发性高血压患者的用药分布
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient)-[r3`服用`]->(drug:药品) WHERE disease1.名称="高血糖" and disease2.名称 = "高血压"   RETURN drug
+
+node>3
+13个正确
+
+1 住院次数大于10次的女性肺癌或胃癌患者吃了哪些中药？
+MATCH (patient:病人)-[r3]->(disease:疾病) where patient.住院次数>10 and patient.性别='女' and disease.疾病名称 in ['肺癌','胃癌'] with distinct(patient) as result_side MATCH (result_side)-->(result:医嘱)-[:SubClassOf*..2]->(:医嘱) return distinct(result) as final_result
+
+2 患有肺癌或冠心病并且服用了硝酸异山梨酯和欣康的女性患者?
+MATCH (patient:病人)-[r1]->(disease:疾病),(patient:病人)-[r3]->(drug:医嘱),(patient:病人)-[r5]->(o5:医嘱) where disease.疾病名称 in ['肺癌','冠心病'] and drug.药品名称 in ['硝酸异山梨酯'] and o5.药品名称 in ['欣康'] and patient.性别='女' with distinct(patient) as result return distinct(result) as final_result
+
+3 2012年9月至2014年1月诊断出肺癌且期间住院次数在3-5次的女性患者的用药分布
+MATCH (patient:病人)-[r1]->(disease:疾病) where disease.疾病名称 in ['肺癌'] and r1.日期>20120901 and r1.日期<20140131 and patient.住院次数>3 and patient.住院次数<5 and patient.性别='女' with distinct(patient) as result_side MATCH (result_side)-->(result:医嘱) return result.药品名称 as final_result
+
+4 2013年之后服用了至灵胶囊或者使用了白玉膏或者使用了艾迪注射液的男性肺癌患者的年龄分布
+MATCH (patient:病人)-[r1]->(drug:医嘱),(patient:病人)-[r3]->(disease:疾病) where drug.药品名称 in ['至灵胶囊','白玉膏','艾迪注射液'] and r1.开始日期>20130101 and patient.性别='男' and disease.疾病名称 in ['肺癌'] with distinct(patient) as result_side MATCH (result_side)-->(result:住院信息) return result.年龄 as final_result
+
+5 2013年患有冠心病或者肺癌且服用了至灵胶囊的女性患者的平均年龄
+MATCH (patient:病人)-[r1]->(disease:疾病),(patient:病人)-[r3]->(o3:医嘱) where disease.疾病名称 in ['冠心病','肺癌'] and r1.日期>20130101 and r1.日期<20131231 and o3.药品名称 in ['至灵胶囊'] and patient.性别='女' with distinct(patient) as result_side MATCH (result_side)-->(result:住院信息) return avg(result.年龄) as final_result
+
+6 2013-2014年期间服用了至灵胶囊或白玉膏的患者的住院次数分布
+MATCH (patient:病人)-[r1]->(drug:医嘱) where drug.药品名称 in ['至灵胶囊','白玉膏'] and r1.开始日期>20130101 and r1.开始日期<20141231 with distinct(patient) as result return result.住院次数 as final_result
+
+7 50-80岁做过肠镜下肠活检术的直肠癌女性患者总数是多少？
+MATCH (patient:病人)-->(inhospital:住院信息),(patient:病人)-[r2]->(o2:手术),(patient:病人)-[r4]->(o4:疾病) where inhospital.年龄>50 and inhospital.年龄<80 and o2.手术名称 in ['肠镜下肠活检术'] and o4.疾病名称 in ['直肠癌'] and patient.性别='女' with distinct(patient) as result return count(result) as final_result
+
+8 在2012至2014年期间做了骨髓活检术且采用局部麻醉的患者的用药分布
+MATCH (patient:病人)-[r1]->(operation:手术) where operation.手术名称 in ['骨髓活检术'] and r1.麻醉方法='局部麻醉' and r1.日期>20120101 and r1.日期<20141231 with distinct(patient) as result_side MATCH (result_side)-->(result:医嘱) return result.药品名称 as final_result
+
+9 患有冠心病和巨细胞动脉炎且服用免疫抑制剂药物的患者分布 
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient)-[r3`服用`]->(drug:药品) WHERE disease1.名称="冠心病" and disease2.名称 = "巨细胞动脉炎" and drug.名称="免疫抑制剂药"   RETURN DISTINCT patient
+
+10 患有高血压和巨细胞动脉炎且服用非甾体抗炎药的患者分布 
+MATCH (disease1:疾病)<-[r1:`被诊断`]-(patient:`病人`)-[r2:`被诊断`]->(disease2:疾病), (patient)-[r3`服用`]->(drug:药品) WHERE disease1.名称="高血压" and disease2.名称 = "巨细胞动脉炎" and drug.名称="非甾体抗炎药"   RETURN DISTINCT patient
+
+11 未患有冠心病和巨细胞动脉炎且服用口服类固醇的患者分布 
+MATCH (patient:病人)-[r`服用`]->(drug:药品) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"冠心病"}) and NOT (patient)-[:`被诊断`]->(:疾病{名称 :"巨细胞动脉炎"}) and drug.名称="口服类固醇" RETURN DISTINCT patient
+
+12 未患有高血压和巨细胞动脉炎且接受抗血小板疗法的患者分布 
+MATCH (patient:病人)-[r`服用`]->(drug:药品) WHERE NOT (patient)-[:`被诊断`]->(:疾病{名称 :"高血压"}) and NOT (patient)-[:`被诊断`]->(:疾病{名称 :"巨细胞动脉炎"}) and drug.名称="抗血小板疗法" RETURN DISTINCT patient
+
+13 患有高血压、冠心病和巨细胞动脉炎且服用降血压药物的患者分布 
+match (s:病人)-[r1]->(o1:疾病),(s)-[r2]->(o2:疾病),(s)-[r3]->(:疾病), (s)-[r4]->(o4:药品)-[:SubClassOf..*]->(:降血压类药) where o1.疾病名称 in ['高血压'] and o2.疾病名称 in ['冠心病'] and o3.疾病名称 in ['巨细胞动脉炎']  with distinct(s) as result return distinct(result) as final_result
+
+解析不正确的3个
+患有败血症、心衰和冠心病的病人总数
+match (s:病人)-[r1]->(o1:疾病),(s)-[r2]->(o2:疾病), where o1.疾病名称 in ['心衰'] and o2.疾病名称 in ['冠心病']  with distinct(s) as result return distinct(result) as final_result
+
+患有心衰后又得了冠心病的高血压患者
+match (s:病人)-[r1]->(o1:疾病),(s)-[r2]->(o2:疾病),(s)-[r3]->(:疾病) where o1.疾病名称 in ['心衰'] and o2.疾病名称 in ['冠心病'] and r1.首发时间<r2.首发时间 and o3.疾病名称 in ['高血压']  with distinct(s) as result return distinct(result) as final_result
+
+患有败血症、心衰且服用了降血压类药的高血压患者人数
+match (s:病人)-[r1]->(o1:疾病),(s)-[r2]->(o2:疾病),(s)-[r3]->(o3:药品)-[:SubClassOf..*]->(:降血压类药) where o1.疾病名称 in ['心衰'] with distinct(s) as result return distinct(result) as final_result
+
+
+
+
+
+
+不能解析的28个问题：
+node=1
+1个
+1 合并病症分布
+
+node = 2
+28个
+1 口服抗高血压药的年增长率
+2 前10位疾病的患者的年龄比例
+3 1991年与2014年居民高血压患病率对比
+4 1995年和2005年患者的性别差异
+5 心血管病患者的血脂水平差异
+6 心血管病患者的年龄对比
+7 NAFLD的患病率和年龄的关系
+8 NAFLD的患病率和性别的关系
+9 鼾症与颈围的关系
+10 支气管哮喘患者的吸入性过敏原检测结果分析
+11 高血压合并症与其他常见相关疾病的观察
+12 心血管疾病患者的种族分布
+13 青光眼患者的致盲情况
+14 患有风湿性多肌痛患者吸烟人数
+15 未患有风湿性多肌痛的患者吸烟人数
+16 患有巨细胞动脉炎的患者吸烟人数
+17 第二次治疗的人数
+18 上海患者的种族分布
+19 心力衰竭患者去年的平均咨询次数
+20 患者在社会经济上层的人数
+21 风险等级低的总人数
+22 患有冠心病的症状
+23 目前吸烟的人数
+24 目前吸烟的病人性别比例
+25 冠心病患者前一年咨询率
+26 中性粒细胞浓度低于正常值的患者的种族分布
+27 得了心衰的患者的种族分布
+28 酗酒病人的男女比例
+
+node =3
+16个
+1 住院患者前10位疾病的性别构成
+2 2014年冠心病病人高血压患病率对比
+3 2014年入院的心血管病患者的年龄对比
+4 1986年和2015年高血压患者的性别差异
+5 1986年和2015年高血压患者的年龄差异
+6 1986年和2015年冠心病患者的性别差异
+7 1986年和2015年冠心病患者的性别差异
+8 患有心衰的支气管哮喘患者的血葡萄糖检测结果分析
+9 患者在五年内的风险如何
+10 患有风湿性多肌痛和其他自身免疫性疾病的患者的人数
+11 患有巨细胞动脉炎和其他自身免疫性疾病的患者的人数
+12 未患有风湿性多肌痛和其他自身免疫性疾病的患者的人数
+13 中性粒细胞浓度低于正常值的吸烟患者的人数
+14 得了心力衰竭的酗酒患者的人数
+15 没有患有慢性阻塞性肺疾病且有吸烟史的人数
+16 患有慢性阻塞性肺疾病且有吸烟史的人数
+
+node > 3
+1个
+1 灵寿县农村半山区居民高血压患病率1991年与2014年对比
+
+
+
